@@ -1,0 +1,12 @@
+{
+  "name": "npm_sass",
+  "version": "1.0.0",
+  "description": "Projeto para exemplificar a automação de compilação de SCSS com SASS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

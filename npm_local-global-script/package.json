@@ -3,7 +3,7 @@
     "uglify-js": "^3.17.4"
   },
   "name": "auto-npm",
-  "description": "O objetivo desse curso é aprender algumas ferramentas de introdução em CI/CD ao automatizar utilizando scripts e aumentar a produtividade de programação sem a utilização de frameworks.",
+  "description": "Projeto para exemplificar o uso de pacotes local e globalmente",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
