@@ -43,3 +43,12 @@ Para automatizar esse processo de uso de um binário que precisa ser feito perio
 ```
 
 O arquivo resultante ```clipboard.g.min.js``` foi verificado manualmente conforme 1.2 e o mesmo possui similitude completa, retornando 0 diferenças.
+
+## 2.1 - Outro exemplo de script
+
+Para reformçar o exemplo de script, utilizou-se o SASS, pelo pacote ```node-sass```, para que gerasse o arquivo ```style.css``` resultante a partir do arquivo ```style.scss```, conforme exemplo abaixo:
+
+```
+npm i node-sass
+./node_modules/.bin/node-sass style.scss style.css
+```
