@@ -9,7 +9,7 @@ Para a utilização de pacotes que contenham binários há 2 opções: pacote lo
 
 ### 1.1 - Pacote local
 
-Para utilizar o binário local, é precisso instalar o pacote o arquivo dentro de node_modules/.bin
+Para utilizar o binário local, é precisso instalar o pacote o arquivo dentro de ```node_modules/.bin```.
 
 Exemplo:
 
@@ -76,4 +76,32 @@ const imc = require('plugin');
 console.log(imc(80, 1.6));
 ```
 
-Para testar, utilizando o ```node main.js``` obtêm-se o resultado ```imc(80, 1.6)```
+Para testar, utilizando o ```node main.js``` obtêm-se o resultado ```imc(80, 1.6)```.
+
+### 3.2 - Exportação múltipla
+
+No caso de múltiplas funções de apoio, é preciso alterar um pouco a exportação. Continuando no arquivo citado acima, adicionou-se uma nova função, exportável, com o objetivo de calcular o quadrado de um número. Como demonstrado abaixo:
+
+```
+function quadrado(x){
+    return x*x;
+}
+```
+
+Para esse caso, é preciso alterar todas as exportações, criando um atributo dentro do objeto ```module.exports``` como demonstrado abaixo:
+
+```
+module.exports.imc = imc;
+module.exports.quadrado = quadrado;
+```
+
+Após segmentar a exportação, é preciso atualizar a importação, onde agora o objeto vinculado ao ```require('')``` contém mais de um atributo, e precisa ser declarado, como mostrado abaixo:
+
+```
+const plugin = require('./plugin');
+
+console.log(plugin.imc(70, 1.6));
+console.log(plugin.quadrado(5));
+```
+
+Para manter o valor semântico da variável, foi alterado o nome de ```imc``` para ```plugin```, para que continue coerente com todas as funcionalidades apresentadas. E, com isso, o uso de cada módulo exportado muda para o nome do objeto, referência de objeto e o nome exportado do método, como demonstrado em ```plugin.imc(70, 1.6)``` ao invés do anterior ```imc(70, 1.6)```.
