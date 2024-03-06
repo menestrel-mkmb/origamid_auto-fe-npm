@@ -105,3 +105,11 @@ console.log(plugin.quadrado(5));
 ```
 
 Para manter o valor semântico da variável, foi alterado o nome de ```imc``` para ```plugin```, para que continue coerente com todas as funcionalidades apresentadas. E, com isso, o uso de cada módulo exportado muda para o nome do objeto, referência de objeto e o nome exportado do método, como demonstrado em ```plugin.imc(70, 1.6)``` ao invés do anterior ```imc(70, 1.6)```.
+
+```
+node main.js
+27.343749999999996
+25
+```
+
+Como demonstrado, ao executar múltiplas funções do arquivo ```plugin.js``` dentro do escopo de ```main.js```, o resultado foi o esperado.
