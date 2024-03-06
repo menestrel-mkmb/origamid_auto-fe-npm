@@ -1,3 +1,4 @@
-const imc = require('./plugin');
+const plugin = require('./plugin');
 
-console.log(imc(70, 1.6));
+console.log(plugin.imc(70, 1.6));
+console.log(plugin.quadrado(5));

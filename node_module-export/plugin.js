@@ -2,4 +2,9 @@ function imc(peso, altura) {
     return peso / (altura * altura);
 }
 
-module.exports = imc;
+function quadrado(x) {
+    return x * x;
+}
+
+module.exports.imc = imc;
+module.exports.quadrado = quadrado;
