@@ -44,7 +44,7 @@ Para automatizar esse processo de uso de um binário que precisa ser feito perio
 
 O arquivo resultante ```clipboard.g.min.js``` foi verificado manualmente conforme 1.2 e o mesmo possui similitude completa, retornando 0 diferenças.
 
-## 2.1 - Outro exemplo de script
+### 2.1 - Outro exemplo de script
 
 Para reforçar o exemplo de script, utilizou-se o SASS, pelo pacote ```node-sass```, para que gerasse o arquivo ```style.css``` resultante a partir do arquivo ```style.scss```, conforme exemplo abaixo:
 
@@ -52,3 +52,28 @@ Para reforçar o exemplo de script, utilizou-se o SASS, pelo pacote ```node-sass
 npm i node-sass
 ./node_modules/.bin/node-sass style.scss style.css
 ```
+
+## 3 - Exportação de módulos
+
+Normalmente se utiliza de módulos para separar as funções comuns em JS para se reaproveitar em outros projetos ou arquivos. A essa função dar-se o nome de exportação de módulos, e seu uso é definido abaixo.
+
+### 3.1 - Exportação única
+
+Ainda sobre exportações, é possível que um arquivo tenha diversos contextos internos, e apenas uma exportação necessária, ou seja um arquivo simples de apenas 1 função, trazendo um exemplo, tem-se o arquivo ```plugin.js``` para exportar, para isso deve-se declarar a função utilizada e exportá-la no módulo:
+```
+function imc(peso, altura){
+    return peso / (altura * altura);
+}
+
+module.exports = imc;
+```
+
+Por sua vez, no arquivo ```main.js``` que deseja importar a função deve-se utilizar:
+
+```
+const imc = require('plugin');
+
+console.log(imc(80, 1.6));
+```
+
+Para testar, utilizando o ```node main.js``` obtêm-se o resultado ```imc(80, 1.6)```
