@@ -46,7 +46,7 @@ O arquivo resultante ```clipboard.g.min.js``` foi verificado manualmente conform
 
 ## 2.1 - Outro exemplo de script
 
-Para reformçar o exemplo de script, utilizou-se o SASS, pelo pacote ```node-sass```, para que gerasse o arquivo ```style.css``` resultante a partir do arquivo ```style.scss```, conforme exemplo abaixo:
+Para reforçar o exemplo de script, utilizou-se o SASS, pelo pacote ```node-sass```, para que gerasse o arquivo ```style.css``` resultante a partir do arquivo ```style.scss```, conforme exemplo abaixo:
 
 ```
 npm i node-sass
