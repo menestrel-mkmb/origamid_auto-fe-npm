@@ -30,3 +30,16 @@ uglifyjs clipboard.js -c -m -o clipboard.g.min.js
 ```
 
 Os arquivos resultantes ```clipboard.min.js``` e ```clipboard.g.min.js``` podem ser verificados em sua similitude em um [verificador online](https://www.textcompare.org/javascript/), do qual retorna 0 diferenças.
+
+## 2 - Utilizando script
+
+Para automatizar esse processo de uso de um binário que precisa ser feito periodicamente, pode-se criar um script dentro do ```package.json```, como pode ser verificado após o script padrão de 'test'.
+
+```
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minclip": "uglifyjs clipboard.js -c -m -o clipboard.auto.min.js"
+},
+```
+
+O arquivo resultante ```clipboard.g.min.js``` foi verificado manualmente conforme 1.2 e o mesmo possui similitude completa, retornando 0 diferenças.
