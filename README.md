@@ -113,3 +113,20 @@ node main.js
 ```
 
 Como demonstrado, ao executar múltiplas funções do arquivo ```plugin.js``` dentro do escopo de ```main.js```, o resultado foi o esperado.
+
+### Utilização de módulos externos (pacotes)
+
+Para utilitários extremamente comuns, é usual utilizar de bibliotecas prontas ao invés de reinventar a roda, tal método é tão comum, que já foi utilizado nesse tutorial, essa forma é conhecida como empacotamento, como no exemplo ```npm i moment```, para a utilização de funções dentro de códigos, ao invés de CLI, é utilizado:
+
+```
+const moment = require('moment');
+
+console.log(moment().format());
+```
+
+E temos como resposta:
+
+```
+node main.js
+2024-03-06T15:46:42-03:00
+```
