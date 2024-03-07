@@ -138,3 +138,35 @@ Demonstrando assim, que o módulo externo foi utilizado a partir de um arquivo J
 O uso de ```const plugin = require('plugin')``` se tornou obsoleto e foi substituído pro ```import { imc, quadrado } from 'plugin'``` para a conformidade com o ECMAScript entre o Node e CommonJS.
 
 Por não fazer parte do caminho linear do curso, após um rápido timeboxing, decidiu-se por tornar pendente um estudo posterior, para dar sequência aos prazos já definidos no estudo ordinário.
+
+## 4 - Gulp
+
+Uma forma de executar atividades repetitivas de forma automática é criando scripts, uma forma simplificada de fazer isso é com o toolkit ```Gulp```.
+
+Para esse exemplo isso seria reutilizado o conceito da seção 1 e automatizarei a compilação de código SASS para CSS, com um detalhe de pegar múltiplos arquivos, em múltiplas pastas, e transformar todos em um único, minificar, e colocar em um destino específico.
+
+Para utilizar o Gulp é preciso instalar o componente ```gulp-cli``` CLI primeiro como pacote global. Após isso é necessário instalar o pacote do Gulp local ```gulp```, e o pacote dos módulos usados na automação, nesse caso o ```gulp-sass```, e o ```node-sass``` ou ```sass``` que o ```gulp-sass``` pede como requisito.
+
+```
+sudo npm i gulp-cli -g
+npm i gulp
+npm i gulp-sass
+npm i node-sass
+```
+
+Para utilizar o gulp e criar a task, é necessário chamar os pacotes em um arquivo específico chamado ```gulpfile.js```, como demonstrado abaixo:
+
+```
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('node-sass'));
+
+function sassCompile() {
+    return gulp.src('css/scss/**/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(gulp.dest('css/'))
+}
+
+gulp.task('sass', sassCompile);
+```
+
+Um breve detalhe é que o nome da ```task``` é determinado na string dentro de seu método, nesse ```sass```, mas caso tenha o nome ```default```, ao chamar o comando ```gulp``` essa função é executada.
