@@ -170,3 +170,5 @@ gulp.task('sass', sassCompile);
 ```
 
 Um breve detalhe é que o nome da ```task``` é determinado na string dentro de seu método, nesse ```sass```, mas caso tenha o nome ```default```, ao chamar o comando ```gulp``` essa função é executada.
+
+Após a execução da task escrita ```gulp sass```, tem-se como resultado o arquivo ```css/style.css``` na pasta destino requisitada.
