@@ -114,7 +114,7 @@ node main.js
 
 Como demonstrado, ao executar múltiplas funções do arquivo ```plugin.js``` dentro do escopo de ```main.js```, o resultado foi o esperado.
 
-### Utilização de módulos externos (pacotes)
+### 3.3 - Utilização de módulos externos (pacotes)
 
 Para utilitários extremamente comuns, é usual utilizar de bibliotecas prontas ao invés de reinventar a roda, tal método é tão comum, que já foi utilizado nesse tutorial, essa forma é conhecida como empacotamento, como no exemplo ```npm i moment```, para a utilização de funções dentro de códigos, ao invés de CLI, é utilizado:
 
@@ -130,3 +130,11 @@ E temos como resposta:
 node main.js
 2024-03-06T15:46:42-03:00
 ```
+
+Demonstrando assim, que o módulo externo foi utilizado a partir de um arquivo JS.
+
+### 3.4 - ECMAScript require e import
+
+O uso de ```const plugin = require('plugin')``` se tornou obsoleto e foi substituído pro ```import { imc, quadrado } from 'plugin'``` para a conformidade com o ECMAScript entre o Node e CommonJS.
+
+Por não fazer parte do caminho linear do curso, após um rápido timeboxing, decidiu-se por tornar pendente um estudo posterior, para dar sequência aos prazos já definidos no estudo ordinário.
