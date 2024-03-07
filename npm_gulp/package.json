@@ -2,7 +2,6 @@
   "name": "npm_gulp",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +10,7 @@
   "license": "ISC",
   "description": "Esse projeto é para aprender a utilização do Gulp",
   "dependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0"
   }
 }
