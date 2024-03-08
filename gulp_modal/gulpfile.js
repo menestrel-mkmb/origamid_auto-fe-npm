@@ -24,17 +24,18 @@ async function sassCompile() {
 
 gulp.task('sass', sassCompile);
 
-async function resolveJs() {
+function resolveJs() {
   return gulp.src('./js/*.js')
   .pipe(concat('script.js'))
-  .pipe(gulp.dest('./js'))
+  .pipe(gulp.dest('./js/'))
 } 
 
 gulp.task('mainjs', resolveJs);
 
 function watch(){
   gulp.watch('css/scss/**/*.scss', sassCompile);
-  gulp.watch(['./**/*.html', './**/*.php', './**/*.js'])
+  gulp.watch(['./js/*.js', '!./js/script.js'], resolveJs);
+  gulp.watch(['./**/*.html', './**/*.php'])
   .on('change', browsersync.reload);
 }
 
