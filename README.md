@@ -204,3 +204,32 @@ function watch(){
 
 gulp.task('default', watch);
 ```
+
+### 4.4 - Browser-sync no Gulp
+
+O Browser-sync é um pacote que automatiza o processo de verificação de atualização nos arquivos locais de um site, e ao receber uma mudança na stream, há o recarregamento automático para facilitar o processo ao desenvolvedor. Para utilizá-lo deve-se instalar o pacote por ```npm i browser-sync --save-dev```, e utilizar no arquivo ````gulpfile.js``:
+
+```
+const browsersync = require('browser-sync').create();
+
+function browser() {
+  browsersync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+}
+
+gulp.task('liveserver', browser);
+
+```
+
+Com o exemplo acima, tem-se a chamada do pacote externo, a indicação do arquivo ```index.html``` raiz do site local na função ```browser()``` e a criação da task ```liveserver``` para a execução a partir do terminal ou concatenando na default.
+
+O resultado é, ao executar a task, o navegador é aberto na página indicada. Entretanto, para recarregar o servidor a medida que o arquivo ```style.css``` é atualizado pós compilação do SASS, é preciso adicionar a pipeline da atividade do SASS ```.pipe(browsersync.stream())```, assim quando um novo arquivo é gerado, ele é enviado ao servidor, que sobreescreve o estilo atual e a engine do navegador se preocupa em atualizar os arquivos com o mais recente.
+
+Utilizando os conceitos vistos em 4.3 e em 4.4, é possível criar um processo paralelo que ao efetuar qualquer modificação no CSS, o mesmo é atualizado e o resultado carregado em tempo real na tela. Esse resultado é obtido por:
+
+```
+gulp.task('default', gulp.parallel('watch', 'liveserver'));
+```
