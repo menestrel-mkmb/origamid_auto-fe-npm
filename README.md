@@ -241,8 +241,8 @@ Com a não utilização de framework, não se faz uso de virtual DOM do conceito
 ```
 function watch(){
   gulp.watch('css/scss/**/*.scss', sassCompile);
-  gulp.watch('./**/*.html').on('change', browsersync.reload);
-  gulp.watch('./**/*.js').on('change', browsersync.reload);
+  gulp.watch(['./**/*.html', './**/*.php', './**/*.js'])
+  .on('change', browsersync.reload);
 }
 ```
 
