@@ -14,6 +14,11 @@
     "gulp-sass": "^5.1.0",
     "node-sass": "^9.0.0"
   },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "not < 2%"
+  ],
   "devDependencies": {
     "gulp-autoprefixer": "^9.0.0"
   }
