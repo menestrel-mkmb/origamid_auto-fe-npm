@@ -233,3 +233,17 @@ Utilizando os conceitos vistos em 4.3 e em 4.4, é possível criar um processo p
 ```
 gulp.task('default', gulp.parallel('watch', 'liveserver'));
 ```
+
+Para acrescentar mais valor a tarefa do servidor com recarregamento inteligente, foi adicionado ao ```gulp.watch()``` as funções de detecção de atualização nos arquivos html e js.
+
+Com a não utilização de framework, não se faz uso de virtual DOM do conceito de SPA, e não existe a possibilidade de um stream alterar de forma similar ao SASS, injetando na pipeline, sendo assim o método utilizado é recarregar a página. Com isso, a função ```watch``` é modificada para o disposto:
+
+```
+function watch(){
+  gulp.watch('css/scss/**/*.scss', sassCompile);
+  gulp.watch('./**/*.html').on('change', browsersync.reload);
+  gulp.watch('./**/*.js').on('change', browsersync.reload);
+}
+```
+
+O resultado foi conferido atualizando na IDE o título para ```Curso de Webdesign atualizado```.
