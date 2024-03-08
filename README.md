@@ -182,3 +182,25 @@ O exemplo mencionado no curso apresenta múltiplos erros devido a atualizações
 Antes da finalização do curso, será efetuada outra avaliação de uma forma de contornar tal problema, seja com a mudança total de pacote, ferramenta ou pesquisa intensiva para adaptação do código e cumprir com objetivo dessa atividade.
 
 O script não gera erros, entretanto não obtêm-se o resultado esperado de adicionar os atributos de estilização para o web-kit. Há ainda uma pequena chance do exemplo de utilização gerada não ser mais necessário, e na verdade o problema com o gulp-autoprefixer já ter sido resolvido, e só ser um exemplo sem utilidade.
+
+### 4.3 - Gulp Watch
+
+A utilização do ```watch``` é uma forma de utilizar função única, funções sequenciais ou paralelas, utilizando como exemplo a compilação em SASS, ao invés de rodar manualmente a compilação, ao deixar a verificação dos arquivos ```.scss``` têm-se a compilação ao salvar qualquer um dos arquivos descritos na função. Isso também pode ser utilizado como forma de encadear arquivos JS, e outros usos como paralelamente comprimir imagens e afins.
+
+Utilizando como base a mesma função de ```sassCompile```, o processo é feito em modo único ao passar diretamente no método como visto abaixo:
+
+```
+gulp.watch('css/scss/**/*.scss', sassCompile);
+```
+
+Ao utilizar ```gulp.series('sass', 'taskName')``` encadeando nome das tasks criadas em ```gulp.task``` tem-se a execução serial das tarefas, no uso do ```gulp.parallel('sass', 'taskName')``` tem-se o uso de execução paralela.
+
+para a execução do conteúdo de ```gulp.watch()``` é necessário criar uma task e atribuí-la um nome, como visto abaixo.
+
+```
+function watch(){
+  gulp.watch('css/scss/**/*.scss', sassCompile);
+}
+
+gulp.task('default', watch);
+```
