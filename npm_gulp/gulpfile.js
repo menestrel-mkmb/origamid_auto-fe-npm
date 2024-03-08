@@ -26,4 +26,18 @@ function watch(){
   gulp.watch('css/scss/**/*.scss', sassCompile);
 }
 
-gulp.task('default', watch);
+gulp.task('watch', watch);
+
+const browsersync = require('browser-sync').create();
+
+function browser() {
+  browsersync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+}
+
+gulp.task('liveserver', browser);
+
+gulp.task('default', gulp.parallel('watch', 'liveserver'));
