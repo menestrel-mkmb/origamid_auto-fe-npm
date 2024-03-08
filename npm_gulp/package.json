@@ -11,8 +11,10 @@
   "description": "Esse projeto é para aprender a utilização do Gulp",
   "dependencies": {
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "^5.1.0",
     "node-sass": "^9.0.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^9.0.0"
   }
 }
