@@ -1,11 +1,11 @@
 # Automação de frontend com npm
-O objetivo desse curso é aprender algumas ferramentas de introdução em CI/CD ao automatizar utilizando scripts e aumentar a produtividade de programação sem a utilização de frameworks.
+O objetivo desse curso é demonstrar algumas ferramentas de introdução em CI/CD ao automatizar partes do desenvolvimento utilizando scripts e aumentar a produtividade de programação sem a utilização de frameworks.
 
 [Link para o curso](https://www.origamid.com/curso/automacao-front-end-com-npm)
 
 ## 1 - Pacotes local vs. global
 
-Para a utilização de pacotes que contenham binários há 2 opções: pacote local ou o pacote globalmente.
+Para a utilização de pacotes que contenham binários há 2 opções: pacote local o global.
 
 ### 1.1 - Pacote local
 
@@ -18,7 +18,7 @@ npm i ugilifyjs
 ./node_modules/.bin/uglify clipboard.js -c -m -o ./clipboard.min.js
 ```
 
-Gera o arquivo minificado, retirando espaços, comentários e encurtando variáveis de escopo.
+O código acima representado gera o arquivo minificado, retirando espaços, comentários e encurtando variáveis de escopo.
 
 ### 1.2 - Pacote global
 
@@ -104,7 +104,7 @@ console.log(plugin.imc(70, 1.6));
 console.log(plugin.quadrado(5));
 ```
 
-Para manter o valor semântico da variável, foi alterado o nome de ```imc``` para ```plugin```, para que continue coerente com todas as funcionalidades apresentadas. E, com isso, o uso de cada módulo exportado muda para o nome do objeto, referência de objeto e o nome exportado do método, como demonstrado em ```plugin.imc(70, 1.6)``` ao invés do anterior ```imc(70, 1.6)```.
+Para manter o valor semântico da variável, o nome foi alterado de ```imc``` para ```plugin```, para que continue coerente com todas as funcionalidades apresentadas. E, com isso, o uso de cada módulo exportado muda para o nome do objeto, referência de objeto e o nome exportado do método, como demonstrado em ```plugin.imc(70, 1.6)``` ao invés do anterior ```imc(70, 1.6)```.
 
 ```
 node main.js
@@ -143,9 +143,7 @@ Por não fazer parte do caminho linear do curso, após um rápido timeboxing, de
 
 Uma forma de executar atividades repetitivas de forma automática é criando scripts, uma forma simplificada de fazer isso é com o toolkit ```Gulp```.
 
-Para esse exemplo isso seria reutilizado o conceito da seção 1 e automatizarei a compilação de código SASS para CSS, com um detalhe de pegar múltiplos arquivos, em múltiplas pastas, e transformar todos em um único, minificar, e colocar em um destino específico.
-
-Para utilizar o Gulp é preciso instalar o componente ```gulp-cli``` CLI primeiro como pacote global. Após isso é necessário instalar o pacote do Gulp local ```gulp```, e o pacote dos módulos usados na automação, nesse caso o ```gulp-sass```, e o ```node-sass``` ou ```sass``` que o ```gulp-sass``` pede como requisito.
+Para utilizar o Gulp é preciso instalar o componente ```gulp-cli``` CLI primeiro como pacote global. Após isso é necessário instalar o pacote do Gulp local ```gulp```, e o pacote dos módulos usados na automação, abaixo tem as dependências do primeiro exemplo: ```gulp-sass```, e o ```node-sass``` ou ```sass``` que o ```gulp-sass```, como será visto no script posterior.
 
 ```
 sudo npm i gulp-cli -g
@@ -154,7 +152,11 @@ npm i gulp-sass
 npm i node-sass
 ```
 
-Para utilizar o gulp e criar a task, é necessário chamar os pacotes em um arquivo específico chamado ```gulpfile.js```, como demonstrado abaixo:
+Para utilizar o gulp e criar a task, é necessário chamar os pacotes e colocar a lógica em um arquivo específico chamado ```gulpfile.js```, criar uma atividade com um nome na string do método ```task``` para identificá-la, caso tenha o nome ```default```, ao chamar o comando ```gulp``` essa função é executada por padrão.
+
+### 4.1 - Primeira task na Gulp
+
+Para introduzir as funcionalidades do Gulp foi reutilizado o conceito da seção 1, onde automatizou-se a compilação de código SASS para CSS, com um detalhe de pegar múltiplos arquivos, em múltiplas pastas, e transformar todos em um único, minificar, e colocar em um destino específico. Uma vez que as dependências locais já foram instaladas no passo anterior, para utilizá-las deve-se seguir o exemplo abaixo:
 
 ```
 const gulp = require('gulp');
@@ -168,7 +170,5 @@ function sassCompile() {
 
 gulp.task('sass', sassCompile);
 ```
-
-Um breve detalhe é que o nome da ```task``` é determinado na string dentro de seu método, nesse ```sass```, mas caso tenha o nome ```default```, ao chamar o comando ```gulp``` essa função é executada.
 
 Após a execução da task escrita ```gulp sass```, tem-se como resultado o arquivo ```css/style.css``` na pasta destino requisitada.
