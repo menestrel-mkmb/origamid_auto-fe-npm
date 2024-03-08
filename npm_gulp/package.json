@@ -20,6 +20,7 @@
     "not < 2%"
   ],
   "devDependencies": {
+    "browser-sync": "^3.0.2",
     "gulp-autoprefixer": "^9.0.0"
   }
 }
