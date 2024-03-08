@@ -172,3 +172,13 @@ gulp.task('sass', sassCompile);
 ```
 
 Após a execução da task escrita ```gulp sass```, tem-se como resultado o arquivo ```css/style.css``` na pasta destino requisitada.
+
+### 4.2 - Gulp e o Autoprefixer
+
+A utilização do ```autoprefixer``` é o começo do contexto de ```postcss```, que diferente do SASS, que gera o arquivo CSS a partir da semântica LESS ou SASS, faz operações periódicas após o CSS ser gerado.
+
+O exemplo mencionado no curso apresenta múltiplos erros devido a atualizações de versões e convenções, como o problema de pacotes ES6 não serem distribuídos no código enquanto módulo e o autoprefixer requerer algo específico não trivialmente identificado, e após timeboxing foi suspenso pelo formato linear desse curso para atender os objetivos.
+
+Antes da finalização do curso, será efetuada outra avaliação de uma forma de contornar tal problema, seja com a mudança total de pacote, ferramenta ou pesquisa intensiva para adaptação do código e cumprir com objetivo dessa atividade.
+
+O script não gera erros, entretanto não obtêm-se o resultado esperado de adicionar os atributos de estilização para o web-kit. Há ainda uma pequena chance do exemplo de utilização gerada não ser mais necessário, e na verdade o problema com o gulp-autoprefixer já ter sido resolvido, e só ser um exemplo sem utilidade.
