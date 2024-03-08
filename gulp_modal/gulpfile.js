@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('node-sass'));
 const browsersync = require('browser-sync').create();
+const concat = require('gulp-concat');
 
 function sassCompileOld() {
     return gulp.src('css/scss/**/*.scss')
@@ -22,6 +23,14 @@ async function sassCompile() {
 }
 
 gulp.task('sass', sassCompile);
+
+async function resolveJs() {
+  return gulp.src('./js/*.js')
+  .pipe(concat('script.js'))
+  .pipe(gulp.dest('./js'))
+} 
+
+gulp.task('mainjs', resolveJs);
 
 function watch(){
   gulp.watch('css/scss/**/*.scss', sassCompile);
