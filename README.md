@@ -247,3 +247,33 @@ function watch(){
 ```
 
 O resultado foi conferido atualizando na IDE o título para ```Curso de Webdesign atualizado```.
+
+### 4.5 - Concat no Gulp
+
+A compilação final do SASS, gera um CSS que concatena todas as importações de arquivos que começam com '_', entretanto o mesmo resultado não é válido para HTML e JS.
+
+Para entender o início do comportamento declarativo em componentes dos frameworks, utilizou-se o pacote ```gulp-concat``` via ```npm i concat``` para automatizar esse processo.
+
+No exemplo têm-se 2 arquivos JS, um chamado ```modal.js``` e outro ```img.js```, para facilitar a importação de outros componentes em um futuro caso, é interessante criar uma rotina para pegar todos os arquivos *.js, exceto o ```script.js``` resultado da concatenação, e deixar o gulp resolver o processo.
+
+A função de concatenação pode ser vista abaixo:
+
+```
+function resolveJs() {
+  return gulp.src('./js/*.js')
+  .pipe(concat('script.js'))
+  .pipe(gulp.dest('./js/'))
+} 
+
+gulp.task('mainjs', resolveJs);
+```
+
+Para utilizar essa função de forma automática, alterou-se a função ```watch```, retirando o hot reload dos arquivos JS, e antecedendo com a função:
+
+```
+gulp.watch(['./js/*.js', '!./js/script.js'], resolveJs);
+```
+
+Assim, quando qualquer arquivo JS que não seja o ```script.js``` é criado ou modificado, o arquivo único concatenado com todos os componentes é criado automaticamente.
+
+Uma breve menção de que, sem a exclusão do arquivo ```script.js```, é provável que haja um concatenamento recursivo do antigo valor do arquivo dentro dele, tal evento pode acarretar no mal funcionamento do script, além é claro, de não ser o objetivo do processo.
