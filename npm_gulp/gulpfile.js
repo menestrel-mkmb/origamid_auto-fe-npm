@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('node-sass'));
+const browsersync = require('browser-sync').create();
 
 function sassCompileOld() {
     return gulp.src('css/scss/**/*.scss')
@@ -16,7 +17,7 @@ async function sassCompile() {
   .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
   .pipe(autoPrefixer())
   .pipe(gulp.dest('css/'))
-    // Your existing code that uses autoPrefixer
+  .pipe(browsersync.stream());
   });
 }
 
@@ -27,8 +28,6 @@ function watch(){
 }
 
 gulp.task('watch', watch);
-
-const browsersync = require('browser-sync').create();
 
 function browser() {
   browsersync.init({
