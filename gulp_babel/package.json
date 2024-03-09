@@ -21,6 +21,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
+    "jquery": "^3.7.1",
     "node-sass": "^9.0.0"
   }
 }
