@@ -324,3 +324,48 @@ async function resolveJs() {
 ```
 
 É importante notar que a utilização da minificação é feita após a transpilação, para a maior otimização do tamanho do arquivo final.
+
+## Plugins Externos
+
+Antes da adoção global de CDN era usual compactar todos os plugins utilizados no site como uma forma de diminuir as requisições externas e melhorar a experiência para o usuário, entretanto caso haja outra necessidade para a utilização de outros plugins externos, há essa possibilidade no gulp.
+
+Para a exemplificação, será utilizado uma das primeiras bibliotecas difundidas, o jquery, instalando seu pacote através de ```npm i jquery```, entretanto, diferente dos outros pacotes, ele não será utilizado dentro do gulpfile.
+
+Para generalização de todos os plugins, criou-se uma função chamada ```pluginsJs```, que pegam todas as referências de plugins necessários, concatena e coloca em um único arquivo para o navegador. Conforme demonstrado abaixo:
+
+```
+async function pluginJs() {
+  return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
+  .pipe(concat('plugins.js'))
+  .pipe(gulp.dest('./js/'))
+  .pipe(browsersync.stream());
+}
+
+gulp.task('pluginsjs', pluginJs);
+```
+
+Essa função é então chamada na atividade padrão do gulp, e adicionada na lista de ignorados do ```resolveJs()``` conforme pode-se avaliar:
+
+```
+async function watch(){
+  sassCompile();
+  resolveJs();
+  pluginJs();
+  gulp.watch('css/scss/**/*.scss', sassCompile);
+  gulp.watch([
+    './js/*.js',
+    '!./js/script.js',
+    '!./js/plugins.js'
+  ],resolveJs);
+  gulp.watch(['./**/*.html', './**/*.php'])
+  .on('change', browsersync.reload);
+}
+```
+
+Assim, depois de concatenar os plugins e injetá-los para uso no ```index.html``` utilizando ```<script src="js/plugins.js"></script>```, é feito uma modificação no script local ```img.js``` para ocultar a imagem do modal, utilizando o ```jquery``` para o teste da injeção da biblioteca externa. Isso é demonstrado pelo fragmento abaixo:
+
+```
+$('.modal-img').hide();
+```
+
+Com essa modificação, o resultado é a imagem do modal ocultada, e é antes percebida na alteração do arquivo ```main.js```, visto que um dos arquivos utilizado na lista de concatenações foi alterado. Provando que o gulp identificou a mudança da biblioteca, tratou-a e a entregou para o navegador utilizá-la da mesma forma que se a biblioteca fosse injetada por CDN.
