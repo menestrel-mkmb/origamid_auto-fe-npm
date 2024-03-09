@@ -27,7 +27,10 @@ async function sassCompile() {
 gulp.task('sass', sassCompile);
 
 async function pluginJs() {
-  return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
+  return gulp.src([
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/moment/min/moment.min.js'
+  ])
   .pipe(concat('plugins.js'))
   .pipe(gulp.dest('./js/'))
   .pipe(browsersync.stream());
