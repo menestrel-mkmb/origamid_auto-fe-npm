@@ -307,3 +307,20 @@ async function resolveJs() {
 ```
 
 Ao adicionar a função de transpilação pode-se notar que o arquivo final já possui um código compatível, como por exemplo a linha ```'use strict'``` no início do script.
+
+Para finalizar a transformação final será utilizado um conceito visto no item 1 e 2 desse guia, minificar o arquivo de script. Sendo assim, utilizando a versão do gulp, o ```gulp-uglify``` deve ser instalado, inicializado com ```const uglify = require('gulp-uglify');``` e adicionado a pipeline, conforme demonstrado abaixo:
+
+```
+async function resolveJs() {
+  return gulp.src('./js/*.js')
+  .pipe(concat('script.js'))
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
+  .pipe(uglify())
+  .pipe(gulp.dest('./js/'))
+  .pipe(browsersync.stream());
+}
+```
+
+É importante notar que a utilização da minificação é feita após a transpilação, para a maior otimização do tamanho do arquivo final.
