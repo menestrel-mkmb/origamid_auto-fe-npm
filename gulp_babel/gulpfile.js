@@ -3,6 +3,7 @@ const sass = require('gulp-sass')(require('node-sass'));
 const browsersync = require('browser-sync').create();
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 
 function sassCompileOld() {
     return gulp.src('css/scss/**/*.scss')
@@ -31,7 +32,9 @@ async function resolveJs() {
   .pipe(babel({
     presets: ['@babel/env']
   }))
+  .pipe(uglify())
   .pipe(gulp.dest('./js/'))
+  .pipe(browsersync.stream());
 } 
 
 gulp.task('mainjs', resolveJs);
