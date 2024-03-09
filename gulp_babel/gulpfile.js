@@ -26,6 +26,15 @@ async function sassCompile() {
 
 gulp.task('sass', sassCompile);
 
+async function pluginJs() {
+  return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
+  .pipe(concat('plugins.js'))
+  .pipe(gulp.dest('./js/'))
+  .pipe(browsersync.stream());
+}
+
+gulp.task('pluginsjs', pluginJs);
+
 async function resolveJs() {
   return gulp.src('./js/*.js')
   .pipe(concat('script.js'))
@@ -42,8 +51,13 @@ gulp.task('mainjs', resolveJs);
 async function watch(){
   sassCompile();
   resolveJs();
+  pluginJs();
   gulp.watch('css/scss/**/*.scss', sassCompile);
-  gulp.watch(['./js/*.js', '!./js/script.js'], resolveJs);
+  gulp.watch([
+    './js/*.js',
+    '!./js/script.js',
+    '!./js/plugins.js'
+  ],resolveJs);
   gulp.watch(['./**/*.html', './**/*.php'])
   .on('change', browsersync.reload);
 }
