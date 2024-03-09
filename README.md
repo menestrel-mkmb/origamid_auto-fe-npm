@@ -277,3 +277,17 @@ gulp.watch(['./js/*.js', '!./js/script.js'], resolveJs);
 Assim, quando qualquer arquivo JS que não seja o ```script.js``` é criado ou modificado, o arquivo único concatenado com todos os componentes é criado automaticamente.
 
 Uma breve menção de que, sem a exclusão do arquivo ```script.js```, é provável que haja um concatenamento recursivo do antigo valor do arquivo dentro dele, tal evento pode acarretar no mal funcionamento do script, além é claro, de não ser o objetivo do processo.
+
+## 4.6 - Babel no Gulp
+
+O JavaScript é uma linguagem que carrega multiparadigma e compatibilidade em seu core, por causa disso pode ser relevante em algum contexto profissional utilizar um código compatível com as versões legadas, como muito da linguagem mudou desde a convenção do ECMAScript 6.
+
+A forma mais fácil de fazer isso é utilizando um transpilador de EM para JS, e inclusive o problema causado por esse contexto já foi trazido nesse guia com a incompatibilidade da linguagem moderna dos módulos ECMAScript com os módulos de JS no item 4.2.
+
+O Babel é esse transpilador, e faz a conversão para as estruturas legadas de um código moderno de forma automática, assim o desenvolvedor não precisa se preocupar em detalhes e problemas de implementação passado, enquanto usa os recursos modernos da linguagem no seu workflow único e mais rápido.
+
+Para instalar o babel é necessário executar a instalação dos seguintes pacotes:
+
+```
+npm install --save-dev gulp-babel @babel/core @babel/preset-env
+```
