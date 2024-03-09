@@ -1,5 +1,8 @@
 {
-$('.modal-img').hide();
+ $('.modal-img').hide();
+ $('.modal-img').show();
+
+console.log(moment().format());
 
 const img = document.querySelector('.modal-img');
 
