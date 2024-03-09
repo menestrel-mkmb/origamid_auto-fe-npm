@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('node-sass'));
 const browsersync = require('browser-sync').create();
 const concat = require('gulp-concat');
+const babel = require('gulp-babel');
 
 function sassCompileOld() {
     return gulp.src('css/scss/**/*.scss')
@@ -24,15 +25,20 @@ async function sassCompile() {
 
 gulp.task('sass', sassCompile);
 
-function resolveJs() {
+async function resolveJs() {
   return gulp.src('./js/*.js')
   .pipe(concat('script.js'))
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
   .pipe(gulp.dest('./js/'))
 } 
 
 gulp.task('mainjs', resolveJs);
 
-function watch(){
+async function watch(){
+  sassCompile();
+  resolveJs();
   gulp.watch('css/scss/**/*.scss', sassCompile);
   gulp.watch(['./js/*.js', '!./js/script.js'], resolveJs);
   gulp.watch(['./**/*.html', './**/*.php'])
