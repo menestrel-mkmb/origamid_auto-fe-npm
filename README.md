@@ -369,3 +369,27 @@ $('.modal-img').hide();
 ```
 
 Com essa modificação, o resultado é a imagem do modal ocultada, e é antes percebida na alteração do arquivo ```main.js```, visto que um dos arquivos utilizado na lista de concatenações foi alterado. Provando que o gulp identificou a mudança da biblioteca, tratou-a e a entregou para o navegador utilizá-la da mesma forma que se a biblioteca fosse injetada por CDN.
+
+Para testar que a função consegue agregar múltiplos arquivos, a biblioteca moment é novamente instalada com ```npm i moment```, seu arquivo minificado é adicionado a lista de plugins como pode ser visto abaixo:
+
+```
+return gulp.src([
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/moment/min/moment.min.js'
+  ])
+```
+
+E o código do script local ```img.js``` foi novamente alterado para visualizar o efeito da bibliteca no console do navegador:
+
+```
+ $('.modal-img').hide();
+ $('.modal-img').show();
+
+console.log(moment().format());
+```
+
+Com isso, têm-se a modificação dos arquivos ```plugins.js```, ```script.js``` após a execução da agregação de plugins e concatenação, transpilação e minificação de scripts locais. E quando o live server abre o navegador com o site, o resultado no console é mostrado abaixo, provando o uso de ambas as bibliotecas a partir da agregação do gulp:
+
+```
+2024-03-09T18:14:30-03:00
+```
