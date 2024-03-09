@@ -1,4 +1,5 @@
 {
+$('.modal-img').hide();
 
 const img = document.querySelector('.modal-img');
 
