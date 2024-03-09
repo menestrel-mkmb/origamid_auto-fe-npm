@@ -291,3 +291,19 @@ Para instalar o babel é necessário executar a instalação dos seguintes pacot
 ```
 npm install --save-dev gulp-babel @babel/core @babel/preset-env
 ```
+
+A utilização do babel só tem sentido em algum pipeline já existente, sendo assim, será adicionado a unificação de todos os arquivos JS a compatibilização do arquivo final, conforme demonstrado abaixo:
+
+```
+async function resolveJs() {
+  return gulp.src('./js/*.js')
+  .pipe(concat('script.js'))
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
+  .pipe(gulp.dest('./js/'))
+  .pipe(browsersync.stream());
+} 
+```
+
+Ao adicionar a função de transpilação pode-se notar que o arquivo final já possui um código compatível, como por exemplo a linha ```'use strict'``` no início do script.
