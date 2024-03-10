@@ -278,7 +278,7 @@ Assim, quando qualquer arquivo JS que não seja o ```script.js``` é criado ou m
 
 Uma breve menção de que, sem a exclusão do arquivo ```script.js```, é provável que haja um concatenamento recursivo do antigo valor do arquivo dentro dele, tal evento pode acarretar no mal funcionamento do script, além é claro, de não ser o objetivo do processo.
 
-## 4.6 - Babel no Gulp
+### 4.6 - Babel no Gulp
 
 O JavaScript é uma linguagem que carrega multiparadigma e compatibilidade em seu core, por causa disso pode ser relevante em algum contexto profissional utilizar um código compatível com as versões legadas, como muito da linguagem mudou desde a convenção do ECMAScript 6.
 
@@ -325,7 +325,7 @@ async function resolveJs() {
 
 É importante notar que a utilização da minificação é feita após a transpilação, para a maior otimização do tamanho do arquivo final.
 
-## Plugins Externos
+### 4.7 - Plugins Externos
 
 Antes da adoção global de CDN era usual compactar todos os plugins utilizados no site como uma forma de diminuir as requisições externas e melhorar a experiência para o usuário, entretanto caso haja outra necessidade para a utilização de outros plugins externos, há essa possibilidade no gulp.
 
@@ -392,4 +392,28 @@ Com isso, têm-se a modificação dos arquivos ```plugins.js```, ```script.js```
 
 ```
 2024-03-09T18:14:30-03:00
+```
+
+## 5 - Jimp
+
+No contexto de responsividade e múltipla origem de arquivos (como CDNs), servidores distribuidos e tipos de formatos para diferentes formas de interagir com o site cria uma necessidade até então ignorada, suprir otimizações para um tipo de arquivo pesado: imagens.
+
+Ao colocar uma imagem em um site, deve-se atentar que o uso indiscriminado pode gerar custos desnecessários, e para evitar isso é interessante o uso de automatizadores, para garantir que sempre seja feita a otimização e a compressão e alteração de imagens para melhorar a experiência do usuário, custos e manutenção.
+
+Tendo isso em vista, o uso do Jimp se torna primordial para garantir que ao trocar uma imagem, o design não precise ser repensado e nem existe uma necessidade de retrabalho por uma alteração quebrar o formato do site e etc.
+
+Para utilizar esse pacote, é necessário primeiro instalá-lo com ```npm i jimp```, e utilizar em um script JS, nesse caso o ```jimp.js``` inicializando o objeto como descrito no exemplo abaixo:
+
+```
+const Jimp = require('jimp');
+
+Jimp.read('./full-imgs/pizza.jpg')
+    .then( img => {
+        img
+        .resize(300, Jimp.AUTO) // resize
+        .quality(60) // set JPEG quality
+        .greyscale() // set greyscale
+        .write('./thumb-imgs/pizza-thumb.jpg');
+    })
+    .catch(err => console.log(err));
 ```
