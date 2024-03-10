@@ -440,3 +440,17 @@ images.forEach( image => {
 ```
 
 Para testar o fator múltiplo do diretório, foi inserido outra imagem de pizza, e o resultado do script foi concluído, como pode-se averiguar nos arquivos.
+
+## SVGO
+
+Todo o contexto do item 5 pode ser aplicado para outro tipo de mídia que também é amplamente usada na web: vetores.
+
+Embora o uso de vetores usualmente seja mais restrito, não diminui a vantagem de otimizar quando necessário. Para isso é utilizado o SVGO, para instalá-lo é utilizado o comando ```sudo npm i -g svgo```, como é um pacote global, ele não altera a árvore do projeto.
+
+Para utilizá-lo é só executar em linha de comando indicando a pasta origem, o formato de arquivo e a pasta destino como em:
+
+```
+svgo full-svgs/*.svg -o svgs
+```
+
+Após isso é possível verificar os vetores resultantes, com um formato minificado e utilizando path para representar os caminhos. O resultado foi verificado em um visualizador de vetores.
