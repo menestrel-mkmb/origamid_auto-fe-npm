@@ -396,7 +396,7 @@ Com isso, têm-se a modificação dos arquivos ```plugins.js```, ```script.js```
 
 ## 5 - Jimp
 
-No contexto de responsividade e múltipla origem de arquivos (como CDNs), servidores distribuidos e tipos de formatos para diferentes formas de interagir com o site cria uma necessidade até então ignorada, suprir otimizações para um tipo de arquivo pesado: imagens.
+No contexto de responsividade e múltipla origem de arquivos (como CDNs), servidores distribuidos, miniaturas para SEO e tipos de formatos para diferentes formas de interagir com o site cria uma necessidade até então ignorada, suprir otimizações para um tipo de arquivo pesado: imagens.
 
 Ao colocar uma imagem em um site, deve-se atentar que o uso indiscriminado pode gerar custos desnecessários, e para evitar isso é interessante o uso de automatizadores, para garantir que sempre seja feita a otimização e a compressão e alteração de imagens para melhorar a experiência do usuário, custos e manutenção.
 
@@ -417,3 +417,26 @@ Jimp.read('./full-imgs/pizza.jpg')
     })
     .catch(err => console.log(err));
 ```
+
+Ao executar o script com ```node jimp.js```, tem-se como resultado o arquivo ```pizza-thumb.jpg```. Entretanto esse script não utiliza de dinamismo para automatizar lotes de arquivos, que é o cenário provável. Para isso fez-se essas modificações:
+
+```
+const Jimp = require('jimp');
+const fs = require('fs');
+
+const images = fs.readdirSync('./full-imgs/');
+
+images.forEach( image => {
+    Jimp.read('./full-imgs/' + image)
+    .then( img => {
+        img
+        .resize(300, Jimp.AUTO) // resize
+        .quality(60) // set JPEG quality
+        .greyscale() // set greyscale
+        .write('./thumb-imgs/' + image);
+    })
+    .catch(err => console.log(err));
+})
+```
+
+Para testar o fator múltiplo do diretório, foi inserido outra imagem de pizza, e o resultado do script foi concluído, como pode-se averiguar nos arquivos.
